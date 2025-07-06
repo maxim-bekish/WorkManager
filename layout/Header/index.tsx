@@ -1,21 +1,16 @@
 import StyleText from '@/components/StyleText';
-import { COLORS } from '@/constants/ui';
+import { BASE, COLORS } from '@/constants/ui';
 import { StyleSheet, View } from 'react-native';
 
 type HeaderProps = {
-  totalTodos: number;
-  completedTodos: number;
+	avatar: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ totalTodos, completedTodos }) => {
+const Header: React.FC<HeaderProps> = ({ avatar }) => {
 	return (
 		<>
 			<View style={styles.container}>
-				<View style={styles.headerMainContainer}>
-					<StyleText>TodoApp</StyleText>
-					<StyleText>March 15.2024</StyleText>
-				</View>
-				<StyleText>Completed {completedTodos}/{totalTodos}</StyleText>
+				<StyleText variant='2xl'>Кабинет</StyleText>
 			</View>
 		</>
 	);
@@ -23,17 +18,11 @@ const Header: React.FC<HeaderProps> = ({ totalTodos, completedTodos }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		// flex: 1,
-		paddingTop: 80,
-		paddingBottom: 15,
-		paddingHorizontal: 20,
-		backgroundColor: COLORS.SECONDARY_BACKGROUND,
-	},
-	headerMainContainer: {
-		marginBottom: 20,
-		justifyContent: 'center',
-		alignItems: 'center',
-		gap: 5,
+		paddingTop: BASE.PADDING.DEFAULT * 6,
+		paddingHorizontal: BASE.PADDING.DEFAULT * 2,
+		backgroundColor: COLORS.BLACK_90,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.WHITE_30,
 	},
 });
 export default Header;
