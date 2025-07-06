@@ -23,6 +23,7 @@ export const COLORS = {
 	BUTTON_DEFAULT: 'rgb(255, 255, 255)',
 	BUTTON_DISABLED: 'rgb(200, 200, 200)',
 	TRANSPARENT: 'transparent',
+	PINK: '#FB7185',
 };
 
 // 3. Константы вынесем перед компонентом для лучшей читаемости
