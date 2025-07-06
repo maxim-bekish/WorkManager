@@ -20,6 +20,9 @@ export const COLORS = {
 	BLACK_30: 'rgb(186, 186, 186)',
 	BLACK_20: 'rgb(209, 209, 209)',
 	BLACK_10: 'rgb(232, 232, 232)',
+	BUTTON_DEFAULT: 'rgb(255, 255, 255)',
+	BUTTON_DISABLED: 'rgb(200, 200, 200)',
+	TRANSPARENT: 'transparent',
 };
 
 // 3. Константы вынесем перед компонентом для лучшей читаемости

@@ -1,5 +1,5 @@
 import { COLORS, TEXT_VARIANTS } from '@/constants/ui';
-import { StyleSheet, Text, TextProps, TextStyle } from 'react-native';
+import { StyleSheet, Text, TextProps } from 'react-native';
 
 type TextVariant = keyof typeof TEXT_VARIANTS;
 
@@ -8,7 +8,7 @@ type StyleTextProps = TextProps & {
 	color?: string;
 };
 
-const StyleText: React.FC<StyleTextProps> = ({ style, variant = 'md', color, ...props }) => {
+export const StyleText: React.FC<StyleTextProps> = ({ style, variant = 'md', color, ...props }) => {
 	// 4. Комбинируем стили с правильным порядком
 	const textStyle = [
 		styles.base,
@@ -28,5 +28,4 @@ const styles = StyleSheet.create({
 		textAlignVertical: 'center', // Для одинакового поведения на Android/iOS
 	},
 });
-
-export default StyleText;
+ 

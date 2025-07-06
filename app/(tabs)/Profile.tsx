@@ -1,10 +1,9 @@
-import StyleText from '@/components/StyleText';
+import { StyleButton } from '@/components';
 import { BASE, COLORS } from '@/constants/ui';
-import Header from '@/layout/Header';
 import RowItem from '@/layout/RowItem';
 import { ItemRow } from '@/types/ItemRow';
 import { useState } from 'react';
-import { FlatList, StatusBar, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 const defaultUserData: ItemRow[] = [
 	{
@@ -60,15 +59,15 @@ export default function Index() {
 
 	return (
 		<View style={styles.container}>
-			<StatusBar barStyle={'light-content'} />
-			<Header avatar='' />
-
-			<FlatList
-				data={userData}
-				keyExtractor={item => item.id.toString()}
-				renderItem={({ item }) => <RowItem userData={item} onChange={handleChange} />}
-				style={styles.listContent}
-			/>
+			<View style={styles.listContent}>
+				<FlatList
+					data={userData}
+					keyExtractor={item => item.id.toString()}
+					renderItem={({ item }) => <RowItem userData={item} onChange={handleChange} />}
+					ItemSeparatorComponent={() => <View style={{ height: BASE.PADDING.DEFAULT * 3 }} />}
+				/>
+			</View>
+			<StyleButton variant='save' label='Редактировать'></StyleButton>
 		</View>
 	);
 }
@@ -76,8 +75,11 @@ export default function Index() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		gap: 40,
+		paddingTop: BASE.PADDING.DEFAULT * 5,
 		backgroundColor: COLORS.BLACK_100,
 	},
 	listContent: {
-	}, 
+		paddingInline: BASE.PADDING.DEFAULT * 2,
+	},
 });

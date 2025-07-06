@@ -1,8 +1,8 @@
 import { StyleSheet, View, TextInput, Text } from 'react-native';
 import { BASE, COLORS } from '@/constants/ui';
-import StyleText from '@/components/StyleText';
 import { ItemRow } from '@/types/ItemRow';
 import { formatNumber } from '@/assets/utils/format';
+import { StyleText } from '@/components';
 
 interface RowItemProps {
 	userData: ItemRow;
@@ -27,7 +27,6 @@ const RowItem = ({ userData, onChange }: RowItemProps) => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 16,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
@@ -41,8 +40,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		fontSize: 16,
 		color: COLORS.WHITE_100,
-		padding: BASE.PADDING.DEFAULT,
-		paddingInline: BASE.PADDING.DEFAULT * 2,
+		paddingVertical: BASE.PADDING.DEFAULT,
+		paddingHorizontal: BASE.PADDING.DEFAULT * 2,
 		borderRadius: BASE.ROUND.DEFAULT,
 		backgroundColor: COLORS.WHITE_10,
 	},
