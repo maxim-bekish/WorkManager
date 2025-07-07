@@ -1,15 +1,20 @@
-import { Slot, useRouter } from 'expo-router';
+import { Slot } from 'expo-router';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '@/store';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { COLORS } from '@/constants/ui';
 
-export default function Layout() {
-	const router = useRouter();
-
+export default function RootLayout() {
 	return (
-		<View style={styles.container}>
-			<StatusBar barStyle={'light-content'} />
-			<Slot />
-		</View>
+		<Provider store={store}>
+			<PersistGate loading={null} persistor={persistor}>
+				<View style={styles.container}>
+					<StatusBar barStyle={'light-content'} />
+					<Slot /> 
+				</View>
+			</PersistGate>
+		</Provider>
 	);
 }
 

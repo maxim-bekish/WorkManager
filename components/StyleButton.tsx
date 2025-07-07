@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { StyleText } from './StyleText';
-import { BASE } from '@/constants/ui';
+import { BASE, COLORS } from '@/constants/ui';
 import { StyleIcon } from './StyleIcon';
 
 import { icons } from 'lucide-react-native';
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'flex-start',
 	},
 	default: {
-		backgroundColor: 'pink',
+		backgroundColor: COLORS.TRANSPARENT,
 	},
 	edit: {
 		backgroundColor: '#7A2A2B',

@@ -1,6 +1,6 @@
 // types/todo.ts
 export interface ItemRow {
-  id: number;
+  id: string;
   title: string;
   value: string | number;
   placeholder?: string;

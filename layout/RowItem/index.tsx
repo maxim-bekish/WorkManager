@@ -1,24 +1,31 @@
-import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { StyleSheet, View, TextInput, TextInputProps } from 'react-native';
 import { BASE, COLORS } from '@/constants/ui';
-import { ItemRow } from '@/types/ItemRow';
 import { formatNumber } from '@/assets/utils/format';
 import { StyleText } from '@/components';
 
-interface RowItemProps {
-	userData: ItemRow;
-	onChange: (id: number, newValue: string) => void;
+interface RowItemProps   {
+	title: string;
+	require?: boolean;
+	placeholder?: string;
+	value: string;
+	readonly?: boolean;
+	id: string;
+	onChange?: (id: string, newValue: string) => void;
 }
 
-const RowItem = ({ userData, onChange }: RowItemProps) => {
+const RowItem = ({ title, id, value, placeholder, readonly = false, onChange }: RowItemProps) => {
 	return (
 		<View style={styles.container}>
-			<StyleText style={styles.title}>{userData.title}:</StyleText>
+			<StyleText style={styles.title}>{title}:</StyleText>
 
 			<TextInput
 				style={styles.input}
-				value={formatNumber(userData.value)}
-				onChangeText={text => onChange(userData.id, text)}
-				placeholder={userData.placeholder}
+				readOnly={readonly}
+				 
+				// value={formatNumber(value)}
+				value={value}
+				onChangeText={text => onChange?.(id, text)}
+				placeholder={placeholder}
 				placeholderTextColor={COLORS.WHITE_50}
 			/>
 		</View>

@@ -24,6 +24,7 @@ export const COLORS = {
 	BUTTON_DISABLED: 'rgb(200, 200, 200)',
 	TRANSPARENT: 'transparent',
 	PINK: '#FB7185',
+	BLUE: '#1600D8',
 };
 
 // 3. Константы вынесем перед компонентом для лучшей читаемости

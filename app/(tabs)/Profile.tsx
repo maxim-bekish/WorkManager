@@ -1,73 +1,54 @@
 import { StyleButton } from '@/components';
 import { BASE, COLORS } from '@/constants/ui';
 import RowItem from '@/layout/RowItem';
-import { ItemRow } from '@/types/ItemRow';
-import { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-const defaultUserData: ItemRow[] = [
-	{
-		id: 1,
-		title: 'Имя',
-		value: 'Максим',
-		placeholder: 'Введите имя',
-		require: true,
-	},
-	{
-		id: 2,
-		title: 'Фамилия',
-		value: 'Бекиш',
-		placeholder: 'Введите Фамилию',
-		require: false,
-	},
-	{
-		id: 3,
-		title: 'Оклад 1',
-		value: 90000,
-		placeholder: 'Оклад на испытательном сроке',
-		require: true,
-	},
-	{
-		id: 4,
-		title: 'Оклад 2',
-		value: 100000,
-		placeholder: 'Оклад после испытательного срока',
-		require: false,
-	},
-	{
-		id: 5,
-		title: 'Старт',
-		value: '17.03.2025',
-		placeholder: 'Старт работы',
-		require: false,
-	},
-	{
-		id: 6,
-		title: 'Почта',
-		value: 'maxamax997@gmail.com',
-		placeholder: 'Ваша почта',
-		require: false,
-	},
-];
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/store';
+import { updateField } from '@/store/userSlice';
+import { useEffect, useState } from 'react';
+import { UserItem } from '@/store/userSlice';
 
 export default function Index() {
-	const [userData, setUserData] = useState<ItemRow[]>(defaultUserData);
+	const storeData = useSelector((state: RootState) => state.user.data);
+	const dispatch = useDispatch();
 
-	const handleChange = (id: number, newValue: string) => {
-		setUserData(prev => prev.map(item => (item.id === id ? { ...item, value: newValue } : item)));
+	const [formData, setFormData] = useState<UserItem[]>([]);
+
+	// при инициализации копируем store → form
+	useEffect(() => {
+		setFormData(storeData);
+	}, [storeData]);
+
+	const handleChange = (id: string, value: string) => {
+		setFormData(prev => prev.map(item => (item.id === id ? { ...item, value } : item)));
+	};
+
+	const handleSave = () => {
+		// сохраняем в redux только при нажатии
+		formData.forEach(item => {
+			dispatch(updateField({ id: item.id, value: item.value }));
+		});
 	};
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.listContent}>
-				<FlatList
-					data={userData}
-					keyExtractor={item => item.id.toString()}
-					renderItem={({ item }) => <RowItem userData={item} onChange={handleChange} />}
-					ItemSeparatorComponent={() => <View style={{ height: BASE.PADDING.DEFAULT * 3 }} />}
-				/>
+				{formData.map(item => (
+					<RowItem
+						key={item.id}
+						id={item.id}
+						title={item.title}
+						value={item.value}
+						placeholder={item.placeholder}
+						require={item.require}
+						onChange={newValue => handleChange(item.id, newValue)}
+					/>
+				))}
 			</View>
-			<StyleButton variant='save' label='Редактировать'></StyleButton>
+
+			<StyleButton variant='save' label='Сохранить' onPress={handleSave} />
+			<StyleButton variant='edit' label='Редактировать' />
 		</View>
 	);
 }
@@ -80,6 +61,6 @@ const styles = StyleSheet.create({
 		backgroundColor: COLORS.BLACK_100,
 	},
 	listContent: {
-		paddingInline: BASE.PADDING.DEFAULT * 2,
+		paddingHorizontal: BASE.PADDING.DEFAULT * 2,
 	},
 });
