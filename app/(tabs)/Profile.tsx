@@ -14,7 +14,7 @@ export default function Index() {
 	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState<UserItem[]>([]);
-
+// test
 	// при инициализации копируем store → form
 	useEffect(() => {
 		setFormData(storeData);
